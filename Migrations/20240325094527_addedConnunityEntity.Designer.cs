@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Reddit;
 
@@ -10,9 +11,11 @@ using Reddit;
 namespace Reddit.Migrations
 {
     [DbContext(typeof(ApplcationDBContext))]
-    partial class ApplcationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240325094527_addedConnunityEntity")]
+    partial class addedConnunityEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,7 +79,7 @@ namespace Reddit.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Communities");
+                    b.ToTable("Community");
                 });
 
             modelBuilder.Entity("Reddit.Models.Post", b =>

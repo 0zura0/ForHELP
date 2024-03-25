@@ -8,5 +8,9 @@ namespace Reddit.Mapper
     public partial class Mapper : IMapper
     {
         public partial Post toPost(CreatePostDto createPostDto);
+
+
+        public partial Community Tocommunity(CreateCommunityDTO CreateCommunityDTO);
+
     }
 }

@@ -75,10 +75,11 @@ namespace Reddit.Controllers
         // POST: api/Posts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Post>> PostPost(CreatePostDto createPostDto)
+        public async Task<ActionResult<Post>> PostPost(CreatePostDto createPostDto, int communityId)
         {
             var post = _mapper.toPost(createPostDto);
-
+            var community = await _context.Communities.FindAsync(communityId);
+            post.Community = community;
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
 

@@ -4,6 +4,8 @@ using Microsoft.Extensions.Hosting;
 using Reddit.Dtos;
 using Reddit.Mapper;
 using Reddit.Models;
+using Reddit.Repositories;
+using Reddit.Requests;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,29 +19,32 @@ namespace Reddit.Controllers
 
         private readonly ApplcationDBContext _context;
         private readonly IMapper _mapper;
+        private readonly ICommunityRepository _communityRepository;
 
-        public CommunityController(ApplcationDBContext context, IMapper mapper)
+
+        public CommunityController(ApplcationDBContext context, IMapper mapper, ICommunityRepository communityRepository)
         {
             _context = context;
             _mapper = mapper;
+            _communityRepository = communityRepository;
+
         }
 
 
         // GET: api/<CommunityController>
-        // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Community>>> GetPosts()
+        public async Task<IEnumerable<string>> GetCommunity(GetPostsRequest getPostsRequest)
         {
-            return await _context.Communities.ToListAsync();
+            await Console.Out.WriteLineAsync(_communityRepository.ToString());
+            var pL = await _communityRepository.GetAll(getPostsRequest);
+            
+            return pL.Items.Select(p => p.Name);
         }
-
-
-
 
 
         // GET api/<CommunityController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Community>> GetPost(int id)
+        public async Task<ActionResult<Community>> GetCommunity(int id)
         {
             var comminity = await _context.Communities.FindAsync(id);
 

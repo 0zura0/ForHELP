@@ -4,6 +4,8 @@ using Reddit;
 using Reddit.Dtos;
 using Reddit.Mapper;
 using Reddit.Models;
+using Reddit.Repositories;
+using Reddit.Requests;
 
 namespace Reddit.Controllers
 {
@@ -20,12 +22,26 @@ namespace Reddit.Controllers
             _mapper = mapper;
         }
 
+
         // GET: api/Posts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
             return await _context.Posts.ToListAsync();
         }
+
+
+
+        // GET: api/Posts
+        //[HttpGet]
+        //public async Task<IEnumerable<string>> GetPosts(GetPostsRequest getPostsRequest)
+        //{
+        //    var pL = await _postsRepository.GetAll(getPostsRequest);
+        //    return pL.Items.Select(p => p.Title);
+        //}
+
+
+
 
         // GET: api/Posts/5
         [HttpGet("{id}")]

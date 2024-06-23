@@ -1,4 +1,5 @@
-﻿using Reddit.Models;
+﻿using NuGet.Protocol;
+using Reddit.Models;
 using Reddit.Requests;
 using System.Linq.Expressions;
 
@@ -15,6 +16,9 @@ namespace Reddit.Repositories
 
         public async Task<PagedList<Community>> GetAll(GetPostsRequest getPostsRequest)
         {
+
+            Console.Out.WriteLineAsync(getPostsRequest.ToJson());
+
             IQueryable<Community> Comunityquery = _context.Communities;
 
             if (!string.IsNullOrWhiteSpace(getPostsRequest.SearchKey))

@@ -15,6 +15,7 @@ namespace Reddit.Models
         // Navigation property to Owner
 
         public virtual int OwnerId { get; set; }
+
         [ForeignKey(nameof(OwnerId))]
         public virtual User Owner { get; set; }
 

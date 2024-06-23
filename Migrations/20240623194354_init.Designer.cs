@@ -11,8 +11,8 @@ using Reddit;
 namespace Reddit.Migrations
 {
     [DbContext(typeof(ApplcationDBContext))]
-    [Migration("20240325094900_addedDBset")]
-    partial class addedDBset
+    [Migration("20240623194354_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

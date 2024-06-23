@@ -35,7 +35,7 @@ namespace Reddit.Controllers
         [HttpGet]
         public async Task<IEnumerable<string>> GetCommunity(GetPostsRequest getPostsRequest)
         {
-            await Console.Out.WriteLineAsync(_communityRepository.ToString());
+            //await Console.Out.WriteLineAsync(_communityRepository.ToString());
             var pL = await _communityRepository.GetAll(getPostsRequest);
             
             return pL.Items.Select(p => p.Name);
@@ -59,14 +59,16 @@ namespace Reddit.Controllers
 
         // POST api/<CommunityController>
         [HttpPost]
-        public async Task<ActionResult<Community>> PostPost(CreateCommunityDTO CreateCommunityDTO)
+        public async Task<ActionResult<Community>> PostCommunity(CreateCommunityDTO CreateCommunityDTO)
         {
             var community = _mapper.Tocommunity(CreateCommunityDTO);
 
-            _context.Communities.Add(community);
+            await _context.Communities.AddAsync(community);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPost", new { id = community.CommunityId }, community);
+            Console.Out.WriteLineAsync("here is psot Community brooooooooooooooooooooooooo ");
+
+            return CreatedAtAction("PostCommunity", new { id = community.CommunityId }, community);
         }
 
 
